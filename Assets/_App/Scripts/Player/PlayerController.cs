@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
 	public float moveSpeed;
 	private Vector2 curMovementInput;
 
+	[Header("Jump")]
+	public float jumpForce;
+	public LayerMask groundLayerMask;
+
 	[Header("Look")]
 	public Transform cameraContainer;
 	public float minXLook;
@@ -81,6 +85,47 @@ public class PlayerController : MonoBehaviour
 		{
 			curMovementInput = Vector2.zero;
 		}
+	}
+
+	public void OnJumpInput(InputAction.CallbackContext context)
+	{
+		// Is this the first frame we are pressing the button
+		if (context.phase == InputActionPhase.Started)
+		{
+			if (IsGrounded())
+			{
+				// Add instantaneous force upwards
+				rig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+			}
+		}
+	}
+
+	bool IsGrounded()
+	{
+		Ray[] rays = new Ray[4] {
+			new Ray(transform.position + (transform.forward * 0.2f) + (Vector3.up * 0.01f), Vector3.down),
+			new Ray(transform.position + (-transform.forward * 0.2f) + (Vector3.up * 0.01f), Vector3.down),
+			new Ray(transform.position + (transform.right * 0.2f) + (Vector3.up * 0.01f), Vector3.down),
+			new Ray(transform.position + (-transform.right * 0.2f) + (Vector3.up * 0.01f), Vector3.down)
+		};
+
+		for (int i = 0; i < rays.Length; i++)
+		{
+			if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawRay(transform.position + (transform.forward * 0.2f), Vector3.down);
+		Gizmos.DrawRay(transform.position + (-transform.forward * 0.2f), Vector3.down);
+		Gizmos.DrawRay(transform.position + (transform.right * 0.2f), Vector3.down);
+		Gizmos.DrawRay(transform.position + (-transform.right * 0.2f), Vector3.down);
 	}
 
 }
