@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class PlayerNeeds : MonoBehaviour
+public class PlayerNeeds : MonoBehaviour, IDamageable
 {
 	public Need health;
 	public Need hunger;
@@ -111,4 +111,9 @@ public class Need
 	{
 		return curValue / maxValue;
 	}
+}
+
+public interface IDamageable
+{
+	void TakePhysicalDamage(int damageAmount);
 }
