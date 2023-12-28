@@ -57,6 +57,128 @@ public class Inventory : MonoBehaviour
 			uiSlots[i].Clear();
 		}
 	}
+
+	public void Toggle()
+	{
+		if (IsOpen())
+		{
+			inventoryWindow.SetActive(false);
+		}
+		else
+		{
+			inventoryWindow.SetActive(true);
+		}
+	}
+
+	public bool IsOpen()
+	{
+		return inventoryWindow.activeInHierarchy;
+	}
+
+	// Add item to the inventory
+	public void AddItem(ItemData item)
+	{
+		if (item.canStack)
+		{
+			ItemSlot slotToStackTo = GetItemStack(item);
+			if (slotToStackTo != null)
+			{
+				slotToStackTo.quantity++;
+				UpdateUI();
+				return;
+			}
+		}
+
+		ItemSlot emptySlot = GetEmptySlot();
+		if (emptySlot != null)
+		{
+			emptySlot.item = item;
+			emptySlot.quantity = 1;
+			UpdateUI();
+			return;
+		}
+
+		// Inventory is full and item cannot be stored
+		ThrowItem(item);
+	}
+
+	// Spawn item in front of the player
+	void ThrowItem(ItemData item)
+	{
+
+	}
+
+	// Update UI when we add, throw or equip an item
+	void UpdateUI()
+	{
+
+	}
+
+	// Returns the item slot that the requested item can be stacked on
+	// Returns null if there is no stack available
+	ItemSlot GetItemStack(ItemData item)
+	{
+		return null;
+	}
+
+	// Returns an empty slot in the inventory
+	// If there is no empty slot return null
+	ItemSlot GetEmptySlot()
+	{
+		return null;
+	}
+
+	// Called when we click on an item slot
+	public void SelectItem(int index)
+	{
+
+	}
+
+	// Called when the inventory opens or the currently selected item has depleted
+	void ClearSelectedItemWindow()
+	{
+
+	}
+
+	public void OnUseButton()
+	{
+
+	}
+
+	public void OnEquipButton()
+	{
+
+	}
+
+	void UnEquip(int index)
+	{
+
+	}
+
+	public void OnUnEquipButton()
+	{
+
+	}
+
+	public void OnDropButton()
+	{
+
+	}
+
+	void RemoveSelectedItem()
+	{
+
+	}
+
+	public void RemoveItem(ItemData item)
+	{
+
+	}
+
+	public bool HasItems(ItemData item, int quantity)
+	{
+		return false;
+	}
 }
 
 public class ItemSlot
