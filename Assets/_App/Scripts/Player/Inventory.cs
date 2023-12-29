@@ -36,11 +36,11 @@ public class Inventory : MonoBehaviour
 	public UnityEvent onCloseInventory;
 
 	// Singleton
-	public static Inventory instance;
+	public static Inventory Instance;
 
 	void Awake()
 	{
-		instance = this;
+		Instance = this;
 		controller = GetComponent<PlayerController>();
 	}
 
@@ -78,6 +78,7 @@ public class Inventory : MonoBehaviour
 	// Add item to the inventory
 	public void AddItem(ItemData item)
 	{
+		// Debug.Log($"AddItem : {item}");
 		if (item.canStack)
 		{
 			ItemSlot slotToStackTo = GetItemStack(item);
@@ -105,19 +106,37 @@ public class Inventory : MonoBehaviour
 	// Spawn item in front of the player
 	void ThrowItem(ItemData item)
 	{
-
+		Vector3 randomRotationEulerAngles = Vector3.one * Random.value * 360f;
+		Instantiate(item.dropPrefab, dropPosition.position, Quaternion.Euler(randomRotationEulerAngles));
 	}
 
 	// Update UI when we add, throw or equip an item
 	void UpdateUI()
 	{
-
+		for (int i = 0; i < slots.Length; i++)
+		{
+			if (slots[i].item != null)
+			{
+				uiSlots[i].Set(slots[i]);
+			}
+			else
+			{
+				uiSlots[i].Clear();
+			}
+		}
 	}
 
 	// Returns the item slot that the requested item can be stacked on
 	// Returns null if there is no stack available
 	ItemSlot GetItemStack(ItemData item)
 	{
+		for (int i = 0; i < slots.Length; i++)
+		{
+			if (slots[i].item == item && slots[i].quantity <= item.maxStackAmount)
+			{
+				return slots[i];
+			}
+		}
 		return null;
 	}
 
@@ -125,6 +144,13 @@ public class Inventory : MonoBehaviour
 	// If there is no empty slot return null
 	ItemSlot GetEmptySlot()
 	{
+		for (int i = 0; i < slots.Length; i++)
+		{
+			if (slots[i].item == null)
+			{
+				return slots[i];
+			}
+		}
 		return null;
 	}
 

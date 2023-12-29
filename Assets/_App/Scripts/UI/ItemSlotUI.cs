@@ -27,8 +27,11 @@ public class ItemSlotUI : MonoBehaviour
 
 	public void Set(ItemSlot slot)
 	{
+		if (slot.item == null) return;
 		curSlot = slot;
 		icon.gameObject.SetActive(true);
+
+		// Debug.Log($"Setting item : {slot.item}");
 		icon.sprite = slot.item.icon;
 		quantityText.text = slot.quantity > 1 ? slot.quantity.ToString() : string.Empty;
 		if (outline != null)
