@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Food to recover your health
   type: 2
   icon: {fileID: 21300000, guid: c9cc59c9f45184af2a6639121f0ca2a2, type: 3}
-  dropPrefab: {fileID: 0}
+  dropPrefab: {fileID: 1355714132206684443, guid: 582e049881b5c453ba79647906bd5e26,
+    type: 3}
   canStack: 1
   maxStackAmount: 12

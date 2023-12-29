@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Used to craft shelter, crafting table, etc
   type: 1
   icon: {fileID: 21300000, guid: fd97237b31ee641e08efa51396b9c920, type: 3}
-  dropPrefab: {fileID: 0}
+  dropPrefab: {fileID: 7463012106469088030, guid: 5de3efdeca85548949329f723c3d1321,
+    type: 3}
   canStack: 0
   maxStackAmount: 0

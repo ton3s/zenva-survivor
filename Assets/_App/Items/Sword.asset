@@ -16,6 +16,7 @@ MonoBehaviour:
   description: A sharp sword to defeat enemies
   type: 1
   icon: {fileID: 21300000, guid: 9fadb42444fdb4addadd3ebe0e1181fd, type: 3}
-  dropPrefab: {fileID: 0}
+  dropPrefab: {fileID: 4009470949702939931, guid: cf6fa3d9b7df94d6198e8f3e0015b107,
+    type: 3}
   canStack: 0
   maxStackAmount: 0
