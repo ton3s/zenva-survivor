@@ -49,6 +49,7 @@ public class ItemSlotUI : MonoBehaviour
 
 	public void OnButtonClick()
 	{
-		Debug.Log("Item Slot UI Button Selected");
+		// Debug.Log("Item Slot UI Button Selected");
+		Inventory.Instance.SelectItem(index);
 	}
 }

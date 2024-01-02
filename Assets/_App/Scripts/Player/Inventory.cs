@@ -72,14 +72,18 @@ public class Inventory : MonoBehaviour
 	{
 		if (IsOpen())
 		{
+			// Closing inventory
 			inventoryWindow.SetActive(false);
 			onCloseInventory.Invoke();
+			controller.ToggleCursor(false);
 		}
 		else
 		{
+			// Open inventory
 			inventoryWindow.SetActive(true);
 			onOpenInventory.Invoke();
 			ClearSelectedItemWindow();
+			controller.ToggleCursor(true);
 		}
 	}
 
@@ -229,12 +233,27 @@ public class Inventory : MonoBehaviour
 
 	public void OnDropButton()
 	{
-
+		ThrowItem(selectedItem.item);
+		RemoveSelectedItem();
 	}
 
 	void RemoveSelectedItem()
 	{
+		selectedItem.quantity--;
 
+		// If this is the last remaining item, remove from inventory
+		if (selectedItem.quantity == 0)
+		{
+			if (uiSlots[selectedItemIndex].equipped)
+			{
+				UnEquip(selectedItemIndex);
+			}
+
+			selectedItem.item = null;
+			ClearSelectedItemWindow();
+		}
+
+		UpdateUI();
 	}
 
 	public void RemoveItem(ItemData item)

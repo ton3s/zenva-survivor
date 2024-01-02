@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
 	// Components
 	private Rigidbody rig;
 
+	[HideInInspector]
+	public bool canLook = true;
+
 	void Awake()
 	{
 		rig = GetComponent<Rigidbody>();
@@ -43,7 +46,10 @@ public class PlayerController : MonoBehaviour
 	void LateUpdate()
 	{
 		// Rotate the camera after the player has moved
-		CameraLook();
+		if (canLook)
+		{
+			CameraLook();
+		}
 	}
 
 	void Move()
@@ -126,6 +132,12 @@ public class PlayerController : MonoBehaviour
 		Gizmos.DrawRay(transform.position + (-transform.forward * 0.2f), Vector3.down);
 		Gizmos.DrawRay(transform.position + (transform.right * 0.2f), Vector3.down);
 		Gizmos.DrawRay(transform.position + (-transform.right * 0.2f), Vector3.down);
+	}
+
+	public void ToggleCursor(bool toggle)
+	{
+		Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+		canLook = !toggle;
 	}
 
 }
