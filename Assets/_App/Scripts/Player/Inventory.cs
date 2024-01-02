@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour
 
 	// Components
 	private PlayerController controller;
+	private PlayerNeeds needs;
 
 	[Header("Events")]
 	public UnityEvent onOpenInventory;
@@ -42,6 +43,7 @@ public class Inventory : MonoBehaviour
 	{
 		Instance = this;
 		controller = GetComponent<PlayerController>();
+		needs = GetComponent<PlayerNeeds>();
 	}
 
 	void Start()
@@ -186,7 +188,14 @@ public class Inventory : MonoBehaviour
 		selectedItemName.text = selectedItem.item.displayName;
 		selectedItemDescription.text = selectedItem.item.description;
 
-		// Todo: Set stat values and stat names
+		// Set stat values and stat names
+		selectedItemStatNames.text = string.Empty;
+		selectedItemStatValues.text = string.Empty;
+		for (int i = 0; i < selectedItem.item.consumables.Length; i++)
+		{
+			selectedItemStatNames.text += selectedItem.item.consumables[i].type.ToString() + "\n";
+			selectedItemStatValues.text += selectedItem.item.consumables[i].value.ToString() + "\n";
+		}
 
 		useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
 		equipButton.SetActive(selectedItem.item.type == ItemType.Equipable && !uiSlots[index].equipped);
@@ -213,7 +222,34 @@ public class Inventory : MonoBehaviour
 
 	public void OnUseButton()
 	{
+		if (selectedItem.item.type == ItemType.Consumable)
+		{
+			for (int i = 0; i < selectedItem.item.consumables.Length; i++)
+			{
+				ItemDataConsumable consumable = selectedItem.item.consumables[i];
+				switch (consumable.type)
+				{
+					case ConsumableType.Health:
+						Debug.Log("Health");
+						needs.Heal(consumable.value);
+						break;
+					case ConsumableType.Hunger:
+						Debug.Log("Hunger");
+						needs.Eat(consumable.value);
+						break;
+					case ConsumableType.Thirst:
+						Debug.Log("Thirst");
+						needs.Drink(consumable.value);
+						break;
+					case ConsumableType.Sleep:
+						Debug.Log("Sleep");
+						needs.Sleep(consumable.value);
+						break;
+				}
+			}
+		}
 
+		RemoveSelectedItem();
 	}
 
 	public void OnEquipButton()

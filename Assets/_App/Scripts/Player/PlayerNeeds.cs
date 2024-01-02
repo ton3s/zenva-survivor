@@ -61,17 +61,17 @@ public class PlayerNeeds : MonoBehaviour, IDamageable
 
 	public void Eat(float amount)
 	{
-		health.Add(amount);
+		hunger.Add(amount);
 	}
 
 	public void Drink(float amount)
 	{
-		health.Add(amount);
+		thirst.Add(amount);
 	}
 
 	public void Sleep(float amount)
 	{
-		health.Subtract(amount);
+		sleep.Subtract(amount);
 	}
 
 	public void TakePhysicalDamage(int amount)
