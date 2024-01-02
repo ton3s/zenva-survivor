@@ -56,6 +56,16 @@ public class Inventory : MonoBehaviour
 			uiSlots[i].index = i;
 			uiSlots[i].Clear();
 		}
+
+		ClearSelectedItemWindow();
+	}
+
+	public void onInventoryButton(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Started)
+		{
+			Toggle();
+		}
 	}
 
 	public void Toggle()
@@ -63,10 +73,13 @@ public class Inventory : MonoBehaviour
 		if (IsOpen())
 		{
 			inventoryWindow.SetActive(false);
+			onCloseInventory.Invoke();
 		}
 		else
 		{
 			inventoryWindow.SetActive(true);
+			onOpenInventory.Invoke();
+			ClearSelectedItemWindow();
 		}
 	}
 
@@ -157,13 +170,41 @@ public class Inventory : MonoBehaviour
 	// Called when we click on an item slot
 	public void SelectItem(int index)
 	{
+		// Check if there is an item in the slot
+		if (slots[index].item == null)
+		{
+			return;
+		}
 
+		selectedItem = slots[index];
+		selectedItemIndex = index;
+
+		selectedItemName.text = selectedItem.item.displayName;
+		selectedItemDescription.text = selectedItem.item.description;
+
+		// Todo: Set stat values and stat names
+
+		useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
+		equipButton.SetActive(selectedItem.item.type == ItemType.Equipable && !uiSlots[index].equipped);
+		unEquipButton.SetActive(selectedItem.item.type == ItemType.Equipable && uiSlots[index].equipped);
+		dropButton.SetActive(true);
 	}
 
 	// Called when the inventory opens or the currently selected item has depleted
 	void ClearSelectedItemWindow()
 	{
+		// Clear the text
+		selectedItem = null;
+		selectedItemName.text = string.Empty;
+		selectedItemDescription.text = string.Empty;
+		selectedItemStatNames.text = string.Empty;
+		selectedItemStatValues.text = string.Empty;
 
+		// Disable buttons
+		useButton.SetActive(false);
+		equipButton.SetActive(false);
+		unEquipButton.SetActive(false);
+		dropButton.SetActive(false);
 	}
 
 	public void OnUseButton()
