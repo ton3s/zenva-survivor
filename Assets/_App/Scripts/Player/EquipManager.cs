@@ -23,7 +23,6 @@ public class EquipManager : MonoBehaviour
 
 	void Start()
 	{
-		EquipNew(testItem);
 	}
 
 	public void OnAttackInput(InputAction.CallbackContext context)
