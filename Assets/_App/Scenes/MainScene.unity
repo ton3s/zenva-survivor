@@ -4856,6 +4856,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1277907306}
   - component: {fileID: 1277907309}
+  - component: {fileID: 1277907314}
   - component: {fileID: 1277907313}
   - component: {fileID: 1277907312}
   - component: {fileID: 1277907311}
@@ -5001,11 +5002,35 @@ MonoBehaviour:
     m_ActionId: eaec3b2b-c10a-490e-8ae9-c7653d47f7dd
     m_ActionName: Main/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1277907314}
+        m_TargetAssemblyTypeName: EquipManager, Assembly-CSharp
+        m_MethodName: OnAttackInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 22a3f9e6-0e2a-4ca2-9bca-1bf329809a9d
     m_ActionName: Main/Attack[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1277907314}
+        m_TargetAssemblyTypeName: EquipManager, Assembly-CSharp
+        m_MethodName: OnAltAttackInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 27639845-8a8b-403b-acb6-fc207795585f
     m_ActionName: Main/AltAttack[/Mouse/rightButton]
   - m_PersistentCalls:
@@ -5201,6 +5226,21 @@ MonoBehaviour:
   onCloseInventory:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1277907314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277907305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc27d633f6b814e17b2b8a68bc5ec90f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testItem: {fileID: 11400000, guid: 4c2a965a16c6c44789956927f6011c30, type: 2}
+  curEquip: {fileID: 0}
+  equipParent: {fileID: 1218593938}
 --- !u!1 &1307514749
 GameObject:
   m_ObjectHideFlags: 0
