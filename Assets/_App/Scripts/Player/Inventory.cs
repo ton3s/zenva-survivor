@@ -230,19 +230,19 @@ public class Inventory : MonoBehaviour
 				switch (consumable.type)
 				{
 					case ConsumableType.Health:
-						Debug.Log("Health");
+						// Debug.Log("Health");
 						needs.Heal(consumable.value);
 						break;
 					case ConsumableType.Hunger:
-						Debug.Log("Hunger");
+						// Debug.Log("Hunger");
 						needs.Eat(consumable.value);
 						break;
 					case ConsumableType.Thirst:
-						Debug.Log("Thirst");
+						// Debug.Log("Thirst");
 						needs.Drink(consumable.value);
 						break;
 					case ConsumableType.Sleep:
-						Debug.Log("Sleep");
+						// Debug.Log("Sleep");
 						needs.Sleep(consumable.value);
 						break;
 				}
