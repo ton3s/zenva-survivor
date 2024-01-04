@@ -31,7 +31,7 @@ public class EquipManager : MonoBehaviour
 			&& curEquip != null
 			&& controller.canLook == true)
 		{
-
+			curEquip.OnAttackInput();
 		}
 	}
 
@@ -41,7 +41,7 @@ public class EquipManager : MonoBehaviour
 			&& curEquip != null
 			&& controller.canLook == true)
 		{
-
+			curEquip.OnAltAttackInput();
 		}
 	}
 

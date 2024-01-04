@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7553940349065420449}
   - component: {fileID: -2730512161997117046}
+  - component: {fileID: 6632802364713133267}
   m_Layer: 9
   m_Name: Equip_Axe
   m_TagString: Untagged
@@ -45,6 +46,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4fd0306adc14fe9941972c2f679482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRate: 0.8
+  attackDistance: 1
+  doesGatherResources: 1
+  doesDealDamage: 0
+  damage: 0
+--- !u!95 &6632802364713133267
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266878042719445224}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cdbc991f4ab3f409785bd1d88bc81379, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &7117029542292648604
 PrefabInstance:
   m_ObjectHideFlags: 0
